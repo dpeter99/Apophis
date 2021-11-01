@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.utils.ScreenUtils
 import game.entities.Entity
-import imgui.ImGui
+
 import ktx.app.KtxScreen
 
 
@@ -51,13 +51,6 @@ class Scene : KtxScreen {
         shape.begin(ShapeRenderer.ShapeType.Filled);
         shape.rect(0F,0F,30F,30F);
         shape.end();
-
-        var f = 0f
-        with(ImGui) {
-            text("Hello, world %d", 123)
-            //inputText("string")
-            //sliderFloat("float", ::f, 0f, 1f)
-        }
 
     }
 

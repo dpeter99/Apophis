@@ -1,9 +1,10 @@
 package game.entities
 
 import registry.IRegistryEntry
+import registry.ResourceName
 
-class EntityType(registryName: String) : IRegistryEntry {
+class EntityType<Type>(override var registryName: ResourceName) : IRegistryEntry {
 
-    override var registryName: String = registryName;
+
 
 }

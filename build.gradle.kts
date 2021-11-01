@@ -14,6 +14,7 @@ repositories {
     maven("https://dl.bintray.com/kotlin/kotlin-dev")
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
     maven("https://jitpack.io")
+    maven("https://raw.githubusercontent.com/kotlin-graphics/mary/master")
 }
 
 // Update this version to match the latest KTX release:
@@ -27,7 +28,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
 
     //api("com.github.kotlin-graphics.imgui:bgfx:$imguiVersion")
-    implementation("com.github.kotlin-graphics:imgui:$imguiVersion")
+    //implementation("com.github.kotlin-graphics:imgui:$imguiVersion")
+
+    implementation("com.github.kotlin-graphics.glm:glm:x")
 
     implementation("com.badlogicgames.gdx:gdx-tools:$gdxVersion")
     implementation("com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop")

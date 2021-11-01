@@ -8,18 +8,22 @@ import java.util.*
 import kotlin.reflect.KProperty
 
 
-class Registry<T : IRegistryEntry> {
+class Registry<T : IRegistryEntry>(override var registryName: ResourceName) : IRegistryEntry {
     val entries: List<IRegistryEntry> = ArrayList()
 
-    private val names: BiMap<String, T> = HashBiMap.create()
+    private val names: BiMap<ResourceName, T> = HashBiMap.create()
 
-    fun register(name: String, itemType: T): T {
+    fun register(name: ResourceName, itemType: T): T {
         names.put(name,itemType);
         return itemType;
     }
 
     fun getValues(): List<T> {
         return names.values.toList()
+    }
+
+    fun deferredRegister(item:T): RegistryDelegate<T> {
+        return RegistryDelegate(this,item);
     }
 
 }

@@ -1,8 +1,7 @@
 package game
 
 import registry.IRegistryEntry
+import registry.ResourceName
 
-class ItemType(registryName: String) : IRegistryEntry {
-
-    override var registryName: String = registryName;
+class ItemType(override var registryName: ResourceName) : IRegistryEntry {
 }
