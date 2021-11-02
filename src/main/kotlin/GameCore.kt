@@ -1,14 +1,13 @@
-import com.badlogic.gdx.Game
-import game.Scene
+import engine.entities.Scene
+import game.TestScene
 import ktx.app.KtxGame
-import ktx.app.KtxScreen
 
 class GameCore : KtxGame<Scene>() {
 
     override fun create() {
         super.create()
 
-        currentScreen = Scene();
+        currentScreen = TestScene();
 
     }
 }

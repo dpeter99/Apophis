@@ -1,12 +1,11 @@
 package game
 
-import eventbus.AppEvent
-import eventbus.SyncEventBus
+import engine.eventbus.AppEvent
+import engine.eventbus.SyncEventBus
 import game.entities.Asteroid
-import game.entities.EntityType
-import registry.Registries
-import registry.Registry
-import registry.ResourceName
+import engine.entities.EntityType
+import engine.registry.Registries
+import engine.registry.ResourceName
 
 object GameRegistries {
 
