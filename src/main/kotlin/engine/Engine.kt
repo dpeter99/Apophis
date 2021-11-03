@@ -3,14 +3,21 @@ package engine
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 import engine.editor.EditorCore
+import engine.eventbus.AppEvent
+import engine.eventbus.SyncEventBus
+import engine.registry.ResourceName
 
 class Engine(type: EngineType) {
 
     companion object{
         lateinit var Instance: Engine;
+
+        fun resName(name: String): ResourceName {
+            return ResourceName("engine", name);
+        }
     }
 
-    val core: GameCore
+    val core: EngineCore
 
     enum class EngineType {
         Game,
@@ -23,8 +30,12 @@ class Engine(type: EngineType) {
         core = when (type) {
             EngineType.Editor -> EditorCore()
 
-            EngineType.Game -> GameCore()
+            EngineType.Game -> EngineCore()
         }
+
+        SyncEventBus.MAIN.post(AppEvent.RegistryCreation);
+
+        SyncEventBus.MAIN.post(AppEvent.Register);
     }
 
     fun Run() {

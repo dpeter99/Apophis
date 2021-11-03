@@ -50,7 +50,7 @@ class Inspector(editor: EditorModule) : EditorWindow(editor) {
 
             if (editor.selected_inspector != null) {
                 //ShadowEngine::Debug::InspectorSystem::DrawEntityInspector(selected_inspector);
-                InspectorSystem.DEFAULT.draw(editor.selected_inspector!!);
+                InspectorSystem.drawInspectorFor(editor.selected_inspector!!);
             }
         }
 

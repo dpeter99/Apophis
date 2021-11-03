@@ -16,4 +16,10 @@ object Registries {
         return reg;
     }
 
+    fun <T : IRegistryEntry, R> addRegistry(reg:R): R where R:Registry<T>{
+        addRegistry(reg.registryName,reg);
+
+        return reg;
+    }
+
 }

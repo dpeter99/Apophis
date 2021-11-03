@@ -8,12 +8,12 @@ import java.util.*
 import kotlin.reflect.KProperty
 
 
-class Registry<T : IRegistryEntry>(override var registryName: ResourceName) : IRegistryEntry {
+open class Registry<T : IRegistryEntry>(override var registryName: ResourceName) : IRegistryEntry {
     val entries: List<IRegistryEntry> = ArrayList()
 
     private val names: BiMap<ResourceName, T> = HashBiMap.create()
 
-    fun register(name: ResourceName, itemType: T): T {
+    open fun register(name: ResourceName, itemType: T): T {
         names.put(name,itemType);
         return itemType;
     }

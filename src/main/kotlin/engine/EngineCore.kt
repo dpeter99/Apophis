@@ -10,20 +10,17 @@ import game.TestScene
 import ktx.app.KtxGame
 
 
-open class GameCore : KtxGame<Scene>(clearScreen = false) {
+open class EngineCore : KtxGame<Scene>(clearScreen = false) {
 
     lateinit var fb: FrameBuffer;
 
     var screenwidth: Int = 0;
     var screenheight: Int = 0;
 
-    init {
-
-    }
+    var firstUpdate: Boolean = true;
 
     override fun create() {
         super.create()
-
 
         screenwidth = Gdx.graphics.width
         screenheight = Gdx.graphics.height
@@ -33,13 +30,22 @@ open class GameCore : KtxGame<Scene>(clearScreen = false) {
 
         currentScreen = TestScene();
 
-        ModuleManager.Init();
-
         fb = FrameBuffer(Pixmap.Format.RGBA8888, screenwidth, screenheight, false);
+
+
 
     }
 
+    fun Init(){
+        ModuleManager.Init();
+    }
+
     override fun render() {
+        if(firstUpdate){
+            Init();
+            firstUpdate = false;
+        }
+
 
         ModuleManager.Update();
 

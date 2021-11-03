@@ -1,9 +1,9 @@
 package engine.editor
 
-import engine.modules.ApplicationModule
-import engine.OnGUIEvent
+import engine.ImGuiLayer
 import engine.entitysystem.Entity
 import engine.eventbus.SyncEventBus
+import engine.modules.ApplicationModule
 
 class EditorModule : ApplicationModule {
 
@@ -18,10 +18,15 @@ class EditorModule : ApplicationModule {
         windows.add(Inspector(this));
         windows.add(SceneView(this));
 
-        SyncEventBus.MAIN.subscribeTo(OnGUIEvent::class.java,false,this::onGui)
+        SyncEventBus.MAIN.subscribeTo(ImGuiLayer.OnGUIEvent::class.java,false,this::onGui)
     }
 
-    fun onGui(event:OnGUIEvent) {
+    override fun Init() {
+        super.Init();
+        
+    }
+
+    fun onGui(event: ImGuiLayer.OnGUIEvent) {
         super.Render()
         for (win in windows){
             win.onGui();
@@ -34,8 +39,3 @@ class EditorModule : ApplicationModule {
 
 }
 
-abstract class EditorWindow(val editor:EditorModule) {
-
-    abstract fun onGui();
-
-}

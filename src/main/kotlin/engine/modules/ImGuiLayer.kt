@@ -131,8 +131,9 @@ class ImGuiLayer : ApplicationModule {
         ImGui.destroyContext();
     }
 
+    class OnGUIEvent{
+
+    }
+
 }
 
-class OnGUIEvent{
-
-}

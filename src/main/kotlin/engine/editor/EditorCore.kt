@@ -1,17 +1,12 @@
 package engine.editor
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
-import engine.Engine
-import engine.GameCore
-import engine.ImGuiLayer
+import engine.EngineCore
 import engine.entitysystem.Scene
 import engine.modules.ModuleManager
-import game.TestScene
 
-class EditorCore : GameCore() {
+class EditorCore : EngineCore() {
 
     companion object{
         lateinit var Instance: EditorCore;
