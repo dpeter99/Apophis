@@ -21,7 +21,7 @@ repositories {
 // Update this version to match the latest KTX release:
 val ktxVersion = "1.10.0-b4"
 val gdxVersion = "1.10.0"
-val imguiVersion = "876ba2648e37cb03464e806c1d1ad2ddb28c7bfc"//"master-SNAPSHOT"//"ca150b4905132dfb66e2a12cdc279e087e56d0a5"
+val imguiVersion = "1.84.1.3"//"876ba2648e37cb03464e806c1d1ad2ddb28c7bfc"//"master-SNAPSHOT"//"ca150b4905132dfb66e2a12cdc279e087e56d0a5"
 
 dependencies {
     testImplementation(kotlin("test"));
@@ -33,6 +33,14 @@ dependencies {
     //implementation("kotlin.graphics:imgui-core:latest")
     //implementation("kotlin.graphics:imgui-glfw:latest")
     //implementation("com.github.kotlin-graphics.imgui:core:42ce6d8e")
+
+    implementation("io.github.spair:imgui-java-binding:$imguiVersion")
+    implementation("io.github.spair:imgui-java-lwjgl3:$imguiVersion")
+    implementation("io.github.spair:imgui-java-natives-linux:$imguiVersion")
+    implementation("io.github.spair:imgui-java-natives-macos:$imguiVersion")
+    implementation("io.github.spair:imgui-java-natives-windows:$imguiVersion")
+
+
 
     implementation("kotlin.graphics:glm:0.9.9.1-3+27")
 
@@ -54,5 +62,5 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "16"
 }

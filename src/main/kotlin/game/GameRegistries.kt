@@ -3,7 +3,7 @@ package game
 import engine.eventbus.AppEvent
 import engine.eventbus.SyncEventBus
 import game.entities.Asteroid
-import engine.entities.EntityType
+import engine.entitysystem.EntityType
 import engine.registry.Registries
 import engine.registry.ResourceName
 

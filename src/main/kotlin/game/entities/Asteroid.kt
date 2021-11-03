@@ -3,14 +3,14 @@ package game.entities
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
-import engine.entities.Entity
+import engine.entitysystem.Entity
 
-class Asteroid: Entity() {
+class Asteroid(name: String = "Asteroid"): Entity(name) {
 
     val texture = Texture(Gdx.files.internal("cobblestone.png"));
 
     override fun Update() {
-        TODO("Not yet implemented")
+        //TODO "Not yet implemented"
     }
 
     override fun Render(batch: Batch, parentAlpha: Float) {

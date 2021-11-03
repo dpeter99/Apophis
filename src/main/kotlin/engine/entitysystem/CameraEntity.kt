@@ -1,14 +1,14 @@
-package engine.entities
+package engine.entitysystem
 
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.math.Matrix4
-import glm_.vec2.Vec2
+import engine.Engine
+import util.toVector3
 
-class CameraEntity : SceneEntity() {
+class CameraEntity : SceneEntity("Camera") {
 
-    private var camera: OrthographicCamera;
+    private lateinit var camera: OrthographicCamera;
 
     private var _worldSize: Float = 10F;
 
@@ -22,18 +22,18 @@ class CameraEntity : SceneEntity() {
     val projectionMatrix: Matrix4
         get() = camera.combined;
 
-    init {
-        val w = Gdx.graphics.width.toFloat()
-        val h = Gdx.graphics.height.toFloat()
+    override fun Setup() {
+        camera = OrthographicCamera(0f, 0f)
 
-        camera = OrthographicCamera(worldSize, worldSize * (h / w))
+        Recalc();
 
-        camera.update()
+        if(scene.mainCamera == null)
+            scene.mainCamera = this;
     }
 
     fun Recalc(){
-        val w = Gdx.graphics.width.toFloat()
-        val h = Gdx.graphics.height.toFloat()
+        val w = Engine.Instance.core.screenwidth;
+        val h = Engine.Instance.core.screenheight
 
         camera.viewportWidth = _worldSize;
         camera.viewportHeight = _worldSize * h/w;
@@ -42,12 +42,12 @@ class CameraEntity : SceneEntity() {
     }
 
     override fun Update() {
-        camera.position = this.worldPosition
+        camera.position.set(this.worldPosition.toVector3());
         //TODO("Not yet implemented")
     }
 
     override fun Render(batch: Batch, parentAlpha: Float) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
 

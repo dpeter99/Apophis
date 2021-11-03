@@ -1,12 +1,14 @@
 package game
 
-import engine.entities.Scene
+import engine.entitysystem.Scene
 import game.entities.Asteroid
+import game.entities.Player
 
 class TestScene : Scene() {
 
     init {
-        this.hierarchy.add(Asteroid());
+        this.add(Asteroid("Test"));
+        this.add(Player())
     }
 
 }

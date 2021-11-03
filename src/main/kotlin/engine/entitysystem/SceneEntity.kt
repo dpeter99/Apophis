@@ -1,9 +1,9 @@
-package engine.entities
+package engine.entitysystem
 
 import glm_.vec2.Vec2
 import util.Zero
 
-abstract class SceneEntity: Entity() {
+abstract class SceneEntity(name:String): Entity(name) {
 
     override var position: Vec2 = Vec2(0,0)
 

@@ -1,4 +1,4 @@
-package engine.entities
+package engine.entitysystem
 
 import engine.registry.IRegistryEntry
 import engine.registry.ResourceName
