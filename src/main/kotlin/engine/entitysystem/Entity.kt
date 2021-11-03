@@ -2,6 +2,7 @@ package engine.entitysystem
 
 import com.badlogic.gdx.graphics.g2d.Batch
 import glm_.vec2.Vec2
+import util.Zero
 
 abstract class Entity(name: String = "") {
 
@@ -17,7 +18,7 @@ abstract class Entity(name: String = "") {
     /**
      * Local position
      */
-    open val position: Vec2
+    open var position: Vec2 = Vec2.Zero
         get() = parent?.position ?: Vec2(0,0);
 
     open val worldPosition: Vec2

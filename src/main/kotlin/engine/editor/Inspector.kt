@@ -1,5 +1,6 @@
 package engine.editor
 
+import engine.editor.inspectors.InspectorSystem
 import imgui.ImGui
 import imgui.flag.ImGuiTreeNodeFlags
 import imgui.flag.ImGuiWindowFlags
@@ -49,6 +50,7 @@ class Inspector(editor: EditorModule) : EditorWindow(editor) {
 
             if (editor.selected_inspector != null) {
                 //ShadowEngine::Debug::InspectorSystem::DrawEntityInspector(selected_inspector);
+                InspectorSystem.DEFAULT.draw(editor.selected_inspector!!);
             }
         }
 

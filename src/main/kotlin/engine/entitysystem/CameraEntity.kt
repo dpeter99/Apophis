@@ -11,7 +11,6 @@ class CameraEntity : SceneEntity("Camera") {
     private lateinit var camera: OrthographicCamera;
 
     private var _worldSize: Float = 10F;
-
     var worldSize :Float
         get() = _worldSize;
         set(value) {
@@ -43,6 +42,7 @@ class CameraEntity : SceneEntity("Camera") {
 
     override fun Update() {
         camera.position.set(this.worldPosition.toVector3());
+        camera.update();
         //TODO("Not yet implemented")
     }
 

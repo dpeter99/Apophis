@@ -29,6 +29,7 @@ class Engine(type: EngineType) {
 
     fun Run() {
         val config = Lwjgl3ApplicationConfiguration()
+        config.setWindowedMode(1000,650);
         Lwjgl3Application(core, config)
     }
 
