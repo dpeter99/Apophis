@@ -24,7 +24,7 @@ open class Scene : KtxScreen {
 
     var firstRun: Boolean = true;
 
-    fun add(ent:Entity, fu: (Entity.() -> Unit)? = null){
+    fun <T: Entity> add(ent:T, fu: (T.() -> Unit)? = null):T{
         ent_mg.addEntity(ent) {
             it.scene = this;
             _hierarchy.add(it);
@@ -33,6 +33,7 @@ open class Scene : KtxScreen {
                 it.fu()
             };
         }
+        return ent;
     }
 
     fun init(){
@@ -52,6 +53,7 @@ open class Scene : KtxScreen {
         val batch: Batch = batch
         batch.projectionMatrix = mainCamera?.projectionMatrix
 
+        Gdx.gl.glClearColor(0f, 0f, 0.1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin()
 

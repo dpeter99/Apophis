@@ -59,8 +59,8 @@ open class EngineCore : KtxGame<Scene>(clearScreen = false) {
 
         fb.begin();
 
-        Gdx.gl.glClearColor(1f, 0f, 0f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //Gdx.gl.glClearColor(1f, 0f, 0f, 1f);
+        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         ModuleManager.Render();
 

@@ -4,8 +4,9 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import engine.entitysystem.Entity
+import engine.entitysystem.SceneEntity
 
-class Asteroid(name: String = "Asteroid"): Entity(name) {
+class Asteroid(name: String = "Asteroid"): SceneEntity(name) {
 
     val texture = Texture(Gdx.files.internal("cobblestone.png"));
 
@@ -14,8 +15,8 @@ class Asteroid(name: String = "Asteroid"): Entity(name) {
     }
 
     override fun Render(batch: Batch, parentAlpha: Float) {
-        val pos_x = 16f/2f;
-        batch.draw(texture, -pos_x, -pos_x,16f,16f);
+        val pos = this.position + 16f/2f;
+        batch.draw(texture, -pos.x, -pos.y,16f,16f);
 
     }
 

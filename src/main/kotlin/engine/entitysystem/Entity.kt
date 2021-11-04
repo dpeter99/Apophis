@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import glm_.vec2.Vec2
 import util.Zero
 
-abstract class Entity(name: String = "") {
+open class Entity(name: String = "") {
 
     var ID: Int = 0;
     lateinit var scene: Scene;
@@ -25,7 +25,7 @@ abstract class Entity(name: String = "") {
         get() = parent?.worldPosition ?: Vec2(0,0);
 
 
-    fun <T : Entity> addInternal(ent: T, fu: (T.() -> Unit)? = null){
+    fun <T : Entity> addInternal(ent: T, fu: (T.() -> Unit)? = null): T {
         scene.ent_mg.addEntity(ent) {
             it.parent = this
             it.scene = this.scene;
@@ -35,6 +35,22 @@ abstract class Entity(name: String = "") {
                 it.fu()
             };
         }
+
+        return ent
+    }
+
+    fun <T : Entity> add(ent: T, fu: (T.() -> Unit)? = null): T {
+        scene.ent_mg.addEntity(ent) {
+            it.parent = this
+            it.scene = this.scene;
+            hierarchy.add(it);
+            it.Setup();
+            if (fu != null) {
+                it.fu()
+            };
+        }
+
+        return ent;
     }
 
     /**
@@ -47,5 +63,6 @@ abstract class Entity(name: String = "") {
     open fun Update() = Unit;
 
     open fun Render(batch: Batch, parentAlpha:Float) = Unit;
+
 
 }

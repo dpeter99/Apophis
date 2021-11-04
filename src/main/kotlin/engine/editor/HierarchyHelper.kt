@@ -15,11 +15,11 @@ object HierarchyHelper {
                       selectionEvent: (Entity) -> Unit,
                       subHierarchy: (Entity)-> List<Entity>){
 
-        ImGui.pushStyleVar(ImGuiStyleVar.CellPadding, 500f,100f);
+        ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, 1f,1f);
 
         for (i in hierarchy) {
 
-            var flag = ImGuiTreeNodeFlags.OpenOnArrow;
+            var flag = ImGuiTreeNodeFlags.OpenOnArrow or ImGuiTreeNodeFlags.FramePadding;
 
             val sub = subHierarchy(i);
             if(sub.isEmpty()){
@@ -34,6 +34,10 @@ object HierarchyHelper {
 
             if(ImGui.treeNodeEx(FontAwesomeIcons.Cube + " " + i.name, flag)){
 
+                if(ImGui.isItemClicked()){
+                    selectionEvent(i);
+                }
+
                 if(!sub.isEmpty()) {
                     DrawHierarchy(
                         sub,
@@ -46,9 +50,7 @@ object HierarchyHelper {
                 ImGui.treePop();
             }
 
-            if(ImGui.isItemClicked()){
-                selectionEvent(i);
-            }
+
         }
 
         ImGui.popStyleVar();

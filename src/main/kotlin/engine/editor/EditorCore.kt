@@ -22,7 +22,6 @@ class EditorCore : EngineCore() {
 
     override fun dispose() {
         super.dispose()
-        ModuleManager.Dispose();
     }
 
     override fun render() {

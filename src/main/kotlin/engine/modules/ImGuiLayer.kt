@@ -58,19 +58,19 @@ class ImGuiLayer : ApplicationModule {
         // This is a natively allocated struct so don't forget to call destroy after atlas is built
         val fontConfig = ImFontConfig()
         fontConfig.mergeMode = true // Enable merge mode to merge cyrillic, japanese and icons with default font
-        fontConfig.glyphExtraSpacing.x = 14f;
+        fontConfig.glyphMinAdvanceX = 12.0f
 
 
         val glyphRanges = rangesBuilder.buildRanges()
         io.fonts.addFontFromMemoryTTF(
             ReadFiles.loadFromResources("fa-regular-400.ttf"),
-            14f,
+            12.0f,
             fontConfig,
             glyphRanges
         ) // font awesome
         io.fonts.addFontFromMemoryTTF(
             ReadFiles.loadFromResources("fa-solid-900.ttf"),
-            14f,
+            12.0f,
             fontConfig,
             glyphRanges
         ) // font awesome

@@ -1,6 +1,7 @@
 package engine.editor.inspectors
 
 import engine.entitysystem.Entity
+import engine.entitysystem.SceneEntity
 import glm_.vec2.Vec2
 import imgui.ImGui
 
@@ -10,10 +11,15 @@ object InspectorHelper {
 
         var pos: FloatArray = ent.position.array;
 
-        if(ImGui.inputFloat3("Pos",pos)){
+
+        ImGui.beginDisabled(!(ent is SceneEntity))
+
+
+        if(ImGui.inputFloat2("Pos",pos)){
             ent.position = Vec2(pos);
         }
 
+        ImGui.endDisabled();
     }
 
 }
