@@ -58,6 +58,9 @@ class ImGuiLayer : ApplicationModule {
         // This is a natively allocated struct so don't forget to call destroy after atlas is built
         val fontConfig = ImFontConfig()
         fontConfig.mergeMode = true // Enable merge mode to merge cyrillic, japanese and icons with default font
+        fontConfig.glyphExtraSpacing.x = 14f;
+
+
         val glyphRanges = rangesBuilder.buildRanges()
         io.fonts.addFontFromMemoryTTF(
             ReadFiles.loadFromResources("fa-regular-400.ttf"),
@@ -71,6 +74,9 @@ class ImGuiLayer : ApplicationModule {
             fontConfig,
             glyphRanges
         ) // font awesome
+        //io.fonts.texGlyphPadding = 14;
+
+
         io.fonts.build()
         fontConfig.destroy()
     }
@@ -106,6 +112,8 @@ class ImGuiLayer : ApplicationModule {
 
         val dockspace_id = ImGui.getID("MyDockSpace");
         ImGui.dockSpace(dockspace_id, 0.0f, 0.0f, dockspace_flags);
+
+        ImGui.showDemoWindow();
 
         //###############################
         SyncEventBus.MAIN.post(OnGUIEvent());
