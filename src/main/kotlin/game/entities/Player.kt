@@ -11,7 +11,7 @@ import glm_.vec2.Vec2
 
 class Player() : SceneEntity("Player") {
 
-    val texture = Texture(Gdx.files.internal("cobblestone.png"));
+    val texture = Texture(Gdx.files.internal("spaceship.png"));
 
     override fun Setup(){
         addInternal(CameraEntity()){
@@ -36,6 +36,6 @@ class Player() : SceneEntity("Player") {
     }
 
     override fun Render(batch: Batch, parentAlpha: Float) {
-        batch.drawCentered(texture,this.position, Vec2(5,5));
+        batch.drawCentered(texture,this.position, Vec2(16,20));
     }
 }

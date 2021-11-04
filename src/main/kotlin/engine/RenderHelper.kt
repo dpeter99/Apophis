@@ -7,7 +7,7 @@ import glm_.vec2.Vec2
 object RenderHelper {
 
     fun Batch.drawCentered(texture: Texture, position: Vec2, size: Vec2) {
-        val pos = position + (size/2f)
+        val pos = position - (size/2f)
         draw(texture, pos.x, pos.y,size.x,size.y);
     }
 

@@ -10,19 +10,21 @@ import java.util.function.Predicate
 
 object HierarchyHelper {
 
-    fun DrawHierarchy(hierarchy: List<Entity>,
-                      selectionPredicate: (Entity)->Boolean,
-                      selectionEvent: (Entity) -> Unit,
-                      subHierarchy: (Entity)-> List<Entity>){
+    fun DrawHierarchy(
+        hierarchy: List<Entity>,
+        selectionPredicate: (Entity) -> Boolean,
+        selectionEvent: (Entity) -> Unit,
+        subHierarchy: (Entity) -> List<Entity>
+    ) {
 
-        ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, 1f,1f);
+        ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, 1f, 1f);
 
         for (i in hierarchy) {
 
             var flag = ImGuiTreeNodeFlags.OpenOnArrow or ImGuiTreeNodeFlags.FramePadding;
 
             val sub = subHierarchy(i);
-            if(sub.isEmpty()){
+            if (sub.isEmpty()) {
                 flag = flag or ImGuiTreeNodeFlags.Leaf;
             }
 
@@ -31,14 +33,13 @@ object HierarchyHelper {
             }
 
 
+            val open = ImGui.treeNodeEx(FontAwesomeIcons.Cube + " " + i.name, flag)
 
-            if(ImGui.treeNodeEx(FontAwesomeIcons.Cube + " " + i.name, flag)){
-
-                if(ImGui.isItemClicked()){
-                    selectionEvent(i);
-                }
-
-                if(!sub.isEmpty()) {
+            if (ImGui.isItemClicked()) {
+                selectionEvent(i);
+            }
+            if (open) {
+                if (!sub.isEmpty()) {
                     DrawHierarchy(
                         sub,
                         selectionPredicate,

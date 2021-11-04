@@ -58,6 +58,7 @@ class ImGuiLayer : ApplicationModule {
         // This is a natively allocated struct so don't forget to call destroy after atlas is built
         val fontConfig = ImFontConfig()
         fontConfig.mergeMode = true // Enable merge mode to merge cyrillic, japanese and icons with default font
+        fontConfig.setGlyphOffset(0f,1.5f);
         fontConfig.glyphMinAdvanceX = 12.0f
 
 
