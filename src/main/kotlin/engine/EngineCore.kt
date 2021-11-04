@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import engine.modules.ModuleManager
 import engine.editor.EditorModule
 import engine.entitysystem.Scene
+import engine.eventbus.AppEvent
+import engine.eventbus.SyncEventBus
 import game.TestScene
 import ktx.app.KtxGame
 
@@ -38,6 +40,10 @@ open class EngineCore : KtxGame<Scene>(clearScreen = false) {
 
     fun Init(){
         ModuleManager.Init();
+
+        SyncEventBus.MAIN.post(AppEvent.RegistryCreation);
+
+        SyncEventBus.MAIN.post(AppEvent.Register);
     }
 
     override fun render() {

@@ -1,6 +1,7 @@
 package engine.editor
 
 import engine.ImGuiLayer
+import engine.editor.inspectors.InspectorSystem
 import engine.entitysystem.Entity
 import engine.eventbus.SyncEventBus
 import engine.modules.ApplicationModule
@@ -23,7 +24,7 @@ class EditorModule : ApplicationModule {
 
     override fun Init() {
         super.Init();
-        
+        InspectorSystem.init();
     }
 
     fun onGui(event: ImGuiLayer.OnGUIEvent) {

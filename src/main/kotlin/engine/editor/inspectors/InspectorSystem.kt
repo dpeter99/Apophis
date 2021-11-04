@@ -16,6 +16,9 @@ object InspectorSystem {
     val DEFAULT by inspectors.deferredRegister(DefaultInspector(Engine.resName("default")));
     val CAMERA by inspectors.deferredRegister(CameraInspector(Engine.resName("camera"), CameraEntity::class.java));
 
+    fun init(){
+
+    }
 
     fun drawInspectorFor(ent: Entity){
 

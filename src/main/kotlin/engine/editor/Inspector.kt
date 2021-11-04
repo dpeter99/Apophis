@@ -11,7 +11,6 @@ class Inspector(editor: EditorModule) : EditorWindow(editor) {
     var shown: Boolean = true
 
 
-
     override fun onGui() {
 
         ImGui.begin("Inspector", ImBoolean(shown), ImGuiWindowFlags.None);
@@ -23,25 +22,19 @@ class Inspector(editor: EditorModule) : EditorWindow(editor) {
 
             ImGui.separator();
 
-            val top_open = ImGui.treeNodeEx(it.name, treeSelectableFlags(editor.selected_ent, editor.selected_inspector));
+            val top_open =
+                ImGui.treeNodeEx(it.name, treeSelectableFlags(editor.selected_ent, editor.selected_inspector));
             if (ImGui.isItemClicked())
                 editor.selected_inspector = editor.selected_ent;
 
-            if (top_open)
-            {
-                for (entity in it.internalHierarchy)
-                {
-
-                    var open: Boolean = ImGui.treeNodeEx(entity.name, treeSelectableFlags(entity, editor.selected_inspector));
-
-                    if (ImGui.isItemClicked())
-                        editor.selected_inspector = entity;
-
-                    if (open) {
-                        ImGui.treePop();
-                    }
-
-                }
+            if (top_open) {
+                HierarchyHelper.DrawHierarchy(it.internalHierarchy, {
+                    editor.selected_inspector == it;
+                }, {
+                    editor.selected_inspector = it;
+                },{
+                    it.internalHierarchy
+                })
 
                 ImGui.treePop();
             }
@@ -49,8 +42,11 @@ class Inspector(editor: EditorModule) : EditorWindow(editor) {
             ImGui.separator();
 
             if (editor.selected_inspector != null) {
-                //ShadowEngine::Debug::InspectorSystem::DrawEntityInspector(selected_inspector);
-                InspectorSystem.drawInspectorFor(editor.selected_inspector!!);
+                //ImGui.arrowButton()
+                    ImGui.text(editor.selected_inspector.toString());
+                //if(ImGui.collapsingHeader(editor.selected_inspector.toString())) {
+                    InspectorSystem.drawInspectorFor(editor.selected_inspector!!);
+                //}
             }
         }
 
@@ -58,7 +54,7 @@ class Inspector(editor: EditorModule) : EditorWindow(editor) {
 
     }
 
-    fun <T> treeSelectableFlags(a:T, b:T): Int {
+    fun <T> treeSelectableFlags(a: T, b: T): Int {
         var node_flags = ImGuiTreeNodeFlags.OpenOnArrow;
         if (a == b)
             node_flags = node_flags.or(ImGuiTreeNodeFlags.Selected);

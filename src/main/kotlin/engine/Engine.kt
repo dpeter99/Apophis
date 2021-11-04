@@ -32,10 +32,6 @@ class Engine(type: EngineType) {
 
             EngineType.Game -> EngineCore()
         }
-
-        SyncEventBus.MAIN.post(AppEvent.RegistryCreation);
-
-        SyncEventBus.MAIN.post(AppEvent.Register);
     }
 
     fun Run() {
