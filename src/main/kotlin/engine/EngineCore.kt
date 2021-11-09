@@ -27,8 +27,8 @@ open class EngineCore : KtxGame<Scene>(clearScreen = false) {
         screenwidth = Gdx.graphics.width
         screenheight = Gdx.graphics.height
 
-        ModuleManager.modules.add(ImGuiLayer());
-        ModuleManager.modules.add(EditorModule());
+        //ModuleManager.modules.add(ImGuiLayer());
+        //ModuleManager.modules.add(EditorModule());
 
         currentScreen = TestScene();
 

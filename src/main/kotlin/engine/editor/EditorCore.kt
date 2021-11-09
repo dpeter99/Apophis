@@ -3,6 +3,7 @@ package engine.editor
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import engine.EngineCore
+import engine.ImGuiLayer
 import engine.entitysystem.Scene
 import engine.modules.ModuleManager
 
@@ -18,6 +19,9 @@ class EditorCore : EngineCore() {
 
     override fun create() {
         super.create()
+
+        ModuleManager.modules.add(ImGuiLayer());
+        ModuleManager.modules.add(EditorModule());
     }
 
     override fun dispose() {
