@@ -37,6 +37,8 @@ class EditorCore : EngineCore() {
             (this.currentScreen as Scene).mainCamera?.Recalc();
         }
 
+
+
         super.render()
     }
 

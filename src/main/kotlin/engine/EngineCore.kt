@@ -8,6 +8,7 @@ import engine.editor.EditorModule
 import engine.entitysystem.Scene
 import engine.eventbus.AppEvent
 import engine.eventbus.SyncEventBus
+import game.GameRegistries
 import game.TestScene
 import ktx.app.KtxGame
 
@@ -40,6 +41,7 @@ open class EngineCore : KtxGame<Scene>(clearScreen = false) {
 
     fun Init(){
         ModuleManager.Init();
+        GameRegistries.Init();
 
         SyncEventBus.MAIN.post(AppEvent.RegistryCreation);
 

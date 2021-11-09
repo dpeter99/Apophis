@@ -2,40 +2,81 @@ package game.entities
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
-import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
-import engine.RenderHelper.drawCentered
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import engine.entitysystem.CameraEntity
 import engine.entitysystem.SceneEntity
+import engine.entitysystem.entities.SpriteRenderer
+import glm_.vec1.operators.plus
 import glm_.vec2.Vec2
+import imgui.extension.imguizmo.ImGuizmo
+import util.Zero
+import kotlin.math.PI
+import kotlin.math.atan2
 
 class Player() : SceneEntity("Player") {
 
-    val texture = Texture(Gdx.files.internal("spaceship.png"));
+    lateinit var renderer: SpriteRenderer;
+
+
+    var heading: Vec2 = Vec2(0f,1f);
+    var speed: Float = 0f;
 
     override fun Setup(){
         addInternal(CameraEntity()){
             this.worldSize = 200f;
         }
+        renderer = addInternal(SpriteRenderer());
     }
 
     override fun Update() {
+        //rotation += 1f/1f;
+
+        var direction: Vec2= Vec2.Zero;
 
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            this.position.y -= 1f;
+            direction.y += 1f;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
-            this.position.y += 1f;
+            direction.y -= 1f;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            this.position.x -= 1f;
+            direction.x += 1f;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            this.position.x += 1f;
+            direction.x -= 1f;
         }
+
+        //direction = direction.normalizeAssign();
+
+        heading = heading + (direction*0.05f);
+        heading = heading.normalizeAssign();
+
+        this.rotation = atan2(heading.x,heading.y)*180/3.1415f;
+
+        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            speed += 1f*0.1f;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)){
+            speed -= 1f*0.1f;
+        }
+
+        this.position plusAssign (heading * speed);
+
     }
 
     override fun Render(batch: Batch, parentAlpha: Float) {
-        batch.drawCentered(texture,this.position, Vec2(16,20));
+
+        scene.shape.setColor(Color.GOLD)
+        scene.shape.filledCircle(worldPosition.x, worldPosition.y, 1f);
+
+        val end = worldPosition + (Vec2(0,10f).rotate(this.rotation/ (180f/3.1415f)));
+
+        //scene.shape.line(worldPosition.x, worldPosition.y,end.x, end.y, 1f);
+
+        scene.shape.setColor(Color.GREEN)
+        scene.shape.line(worldPosition.x, worldPosition.y,worldPosition.x + (heading.x*10f), worldPosition.y + (heading.y*10f), 1f);
+
     }
 }

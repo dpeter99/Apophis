@@ -21,7 +21,7 @@ class SceneView(editor: EditorModule) : EditorWindow(editor) {
             EditorCore.Instance.resizeFB(rect.x.toInt(), rect.y.toInt());
         }
 
-        ImGui.image(EditorCore.Instance.fb.colorBufferTexture.textureObjectHandle,rect.x,rect.y,0F,0f,1f,1f);
+        ImGui.image(EditorCore.Instance.fb.colorBufferTexture.textureObjectHandle,rect.x,rect.y,0F,1f,1f,0f);
 
 
         ImGui.end()

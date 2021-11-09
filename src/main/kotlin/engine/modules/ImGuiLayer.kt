@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics
 import engine.eventbus.SyncEventBus
 import engine.modules.ApplicationModule
 import imgui.*
+import imgui.extension.imguizmo.ImGuizmo
 import imgui.flag.ImGuiConfigFlags
 import imgui.flag.ImGuiDockNodeFlags
 import imgui.flag.ImGuiStyleVar
@@ -85,11 +86,19 @@ class ImGuiLayer : ApplicationModule {
     override fun PreFrame() {
 
 
+
+    }
+
+    override fun LateRender() {
+
     }
 
     override fun AfterFrameEnd() {
+
         imGuiGlfw.newFrame();
+
         ImGui.newFrame();
+        ImGuizmo.beginFrame();
 
         //ImGui.dockSpace(1);
         var window_flags = ImGuiWindowFlags.MenuBar.or(ImGuiWindowFlags.NoDocking)

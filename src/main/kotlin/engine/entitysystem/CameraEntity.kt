@@ -19,6 +19,12 @@ class CameraEntity : SceneEntity("Camera") {
         }
 
     val projectionMatrix: Matrix4
+        get() = camera.projection;
+
+    val viewMatrix: Matrix4
+        get() = camera.view;
+
+    val combinedMatrix: Matrix4
         get() = camera.combined;
 
     override fun Setup() {

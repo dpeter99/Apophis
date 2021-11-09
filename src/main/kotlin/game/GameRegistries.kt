@@ -1,11 +1,14 @@
 package game
 
+import engine.editor.inspectors.InspectorSystem
 import engine.eventbus.AppEvent
 import engine.eventbus.SyncEventBus
 import game.entities.Asteroid
 import engine.entitysystem.EntityType
 import engine.registry.Registries
 import engine.registry.ResourceName
+import game.entities.PLayerInspector
+import game.entities.Player
 
 object GameRegistries {
 
@@ -17,27 +20,15 @@ object GameRegistries {
 
     val ASTEROID = entityType.deferredRegister(EntityType<Asteroid>(name("asteroid")));
 
-    fun doRegister(){
-        SyncEventBus.MAIN.post(AppEvent.RegistryCreation);
+    val PLAYER_INSPECTOR = InspectorSystem.inspectors.deferredRegister(PLayerInspector(ResourceName("game", "player_inspector"),Player::class.java))
 
-        SyncEventBus.MAIN.post(AppEvent.Register);
-    }
 
     fun name(name:String): ResourceName {
         return ResourceName("apophis",name);
     }
 
-}
+    fun Init() {
 
-
-fun main() {
-
-    GameRegistries.doRegister();
-
-    GameRegistries.itemTypes.getValues().forEach {
-        System.out.println(it.registryName);
     }
-
-    //System.out.println("asd");
 
 }

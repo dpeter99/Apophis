@@ -8,7 +8,7 @@ import java.util.*
 import kotlin.reflect.KProperty
 
 
-open class Registry<T : IRegistryEntry>(override var registryName: ResourceName) : IRegistryEntry {
+open class Registry<T : IRegistryEntry>(override var registryName: ResourceName) : IRegistryEntry, Iterable<T> {
     val entries: List<IRegistryEntry> = ArrayList()
 
     private val names: BiMap<ResourceName, T> = HashBiMap.create()
@@ -24,6 +24,10 @@ open class Registry<T : IRegistryEntry>(override var registryName: ResourceName)
 
     fun deferredRegister(item:T): RegistryDelegate<T> {
         return RegistryDelegate(this,item);
+    }
+
+    override fun iterator(): Iterator<T> {
+        return names.values.iterator();
     }
 
 }

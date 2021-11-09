@@ -2,7 +2,10 @@ package engine.entitysystem
 
 import com.badlogic.gdx.graphics.g2d.Batch
 import glm_.vec2.Vec2
+import util.One
 import util.Zero
+
+
 
 open class Entity(name: String = "") {
 
@@ -23,6 +26,28 @@ open class Entity(name: String = "") {
 
     open val worldPosition: Vec2
         get() = parent?.worldPosition ?: Vec2(0,0);
+
+
+    /**
+     * Rotation
+     */
+    open var rotation: Float = 0F
+        get() = parent?.rotation ?: 0F;
+
+    open val worldRotation: Float
+        get() = parent?.worldRotation ?: 0F;
+
+
+
+    /**
+     * Scale
+     */
+    open var scale: Vec2 = Vec2.One
+        get() = parent?.scale ?: Vec2.One
+
+    open var worldScale: Vec2 = Vec2.One
+        get() = parent?.worldScale ?: Vec2.One;
+
 
 
     fun <T : Entity> addInternal(ent: T, fu: (T.() -> Unit)? = null): T {

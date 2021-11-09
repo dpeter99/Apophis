@@ -18,6 +18,7 @@ class EditorModule : ApplicationModule {
         windows.add(Hierarchy(this));
         windows.add(Inspector(this));
         windows.add(SceneView(this));
+        windows.add(RegistryViewer(this));
 
         SyncEventBus.MAIN.subscribeTo(ImGuiLayer.OnGUIEvent::class.java,false,this::onGui)
     }
