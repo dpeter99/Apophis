@@ -28,6 +28,7 @@ dependencies {
     testImplementation(kotlin("test"));
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.31")
 
     //api("com.github.kotlin-graphics.imgui:bgfx:$imguiVersion")
     //implementation("com.github.kotlin-graphics:imgui:$imguiVersion")
