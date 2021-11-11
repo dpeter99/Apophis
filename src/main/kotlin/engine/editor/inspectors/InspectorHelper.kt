@@ -105,7 +105,7 @@ object InspectorHelper {
                 if(f.returnType == Float::class.createType()){
 
                     val rot = ImFloat((f.getter.call(ent) as Float))
-                    if(DrawFloatControl(f.name,rot)){
+                    if(DrawFloatControl(f.name,rot, showButtons = false)){
                         if(f is KMutableProperty<*>)
                             f.setter.call(ent,rot.get());
                     }
@@ -120,7 +120,7 @@ object InspectorHelper {
 
     }
 
-    fun DrawFloatControl(label: String, values: ImFloat, resetValue: Float = 0.0f, columnWidth: Float = 100.0f): Boolean {
+    fun DrawFloatControl(label: String, values: ImFloat, resetValue: Float = 0.0f, columnWidth: Float = 100.0f, showButtons : Boolean=true): Boolean {
         val io = ImGui.getIO();
         //var boldFont = io.fonts. ->Fonts[0];
 
@@ -131,12 +131,12 @@ object InspectorHelper {
         ImGui.text(label);
         ImGui.nextColumn();
 
-        var w =ImGui.calcItemWidth();
+        val w = ImGui.calcItemWidth();
 
-        ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, 0f, 0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, 0f, ImGui.getStyle().itemSpacingY);
 
         //val x: FloatArray = floatArrayOf(values.)
-        val res = internal_float_field("X",w, values.data, resetValue, red)
+        val res = internal_float_field("X", w, values.data, resetValue, red, showButtons)
             //values.element = x[0];
 
         ImGui.popStyleVar();
@@ -148,7 +148,7 @@ object InspectorHelper {
         return res;
     }
 
-    fun DrawVec2Control(label: String, values: Vec2, resetValue: Float = 0.0f, columnWidth: Float = 100.0f): Boolean {
+    fun DrawVec2Control(label: String, values: Vec2, resetValue: Float = 0.0f, columnWidth: Float = 100.0f, showButtons : Boolean=true): Boolean {
         val io = ImGui.getIO();
         //var boldFont = io.fonts. ->Fonts[0];
 
@@ -161,19 +161,21 @@ object InspectorHelper {
 
         val w = ImGui.calcItemWidth()/2;
 
-        ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, 0f, 0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, 0f, ImGui.getStyle().itemSpacingY);
 
         var res = false;
 
         val x: FloatArray = floatArrayOf(values.x)
-        if(internal_float_field("X",w, x,resetValue, red)) {
+        if(internal_float_field("X",w, x,resetValue, red, showButtons)) {
             values.x = x[0];
             res = true;
         }
-        ImGui.sameLine();
+        ImGui.sameLine(0f,ImGui.getStyle().itemInnerSpacingX);
+
+
 
         val y: FloatArray = floatArrayOf(values.y)
-        if(internal_float_field("Y", w, y, resetValue, green)) {
+        if(internal_float_field("Y", w, y, resetValue, green, showButtons)) {
             values.y = y[0];
             res = true;
         }
@@ -193,25 +195,25 @@ object InspectorHelper {
         w: Float,
         values: FloatArray,
         resetValue: Float,
-        color: ButtonColorSet
+        color: ButtonColorSet,
+        showButtons: Boolean
     ): Boolean {
         val lineHeight = ImGui.getFont().fontSize + ImGui.getStyle().framePaddingY * 2.0f;
         val buttonSize = ImVec2(lineHeight + 3.0f, lineHeight);
 
         ImGui.pushItemWidth(w);
 
-        color.push();
-
         var res = false;
 
-        //ImGui.pushFont(boldFont);
-        if (ImGui.button(label, buttonSize.x, buttonSize.y)) {
-            values[0] = resetValue;
-            res = true;
+        if(showButtons) {
+            rect_button(label,buttonSize,color){
+                values[0] = resetValue;
+                res = true;
+            }
         }
-        //ImGui.PopFont();
-
-        color.pop();
+        else{
+            ImGui.dummy(buttonSize.x, buttonSize.y)
+        }
 
         ImGui.sameLine();
 
@@ -221,7 +223,16 @@ object InspectorHelper {
 
         return res;
     }
+}
 
+fun rect_button(label: String,buttonSize:ImVec2, color: ButtonColorSet, press: ()->Unit){
+    color.push();
+
+    if (ImGui.button(label, buttonSize.x, buttonSize.y)) {
+        press();
+    }
+
+    color.pop();
 
 }
 

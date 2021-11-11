@@ -20,7 +20,7 @@ class Asteroid(name: String = "Asteroid"): SceneEntity(name) {
 
     override fun Render(batch: Batch, parentAlpha: Float) {
         val pos = this.position + 16f/2f;
-        batch.draw(texture, -pos.x, -pos.y,16f,16f);
+        batch.draw(texture, pos.x, pos.y,16f,16f);
 
     }
 
