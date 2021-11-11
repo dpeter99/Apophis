@@ -1,0 +1,3 @@
+[submodule "dependencies/imgui-java"]
+	path = dependencies/imgui-java
+	url = https://github.com/SpaiR/imgui-java

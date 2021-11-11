@@ -1,11 +1,8 @@
 package engine.editor
 
 import engine.Engine
-import engine.entitysystem.Entity
 import engine.registry.Registries
 import imgui.ImGui
-import imgui.flag.ImGuiTreeNodeFlags
-import util.FontAwesomeIcons
 
 class RegistryViewer(editor: EditorModule) : EditorWindow(editor) {
 

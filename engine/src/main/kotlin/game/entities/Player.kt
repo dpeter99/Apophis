@@ -4,15 +4,11 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import engine.entitysystem.CameraEntity
 import engine.entitysystem.SceneEntity
 import engine.entitysystem.entities.SpriteRenderer
-import glm_.vec1.operators.plus
 import glm_.vec2.Vec2
-import imgui.extension.imguizmo.ImGuizmo
 import util.Zero
-import kotlin.math.PI
 import kotlin.math.atan2
 
 class Player() : SceneEntity("Player") {

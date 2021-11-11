@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.*
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import engine.modules.ModuleManager
-import engine.editor.EditorModule
 import engine.entitysystem.Scene
 import engine.eventbus.AppEvent
 import engine.eventbus.SyncEventBus

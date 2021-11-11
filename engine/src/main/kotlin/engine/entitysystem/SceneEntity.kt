@@ -1,7 +1,6 @@
 package engine.entitysystem
 
 import com.badlogic.gdx.math.Affine2
-import com.badlogic.gdx.math.Vector2
 import glm_.vec2.Vec2
 import util.One
 import util.Zero

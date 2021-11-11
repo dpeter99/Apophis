@@ -1,9 +1,6 @@
 package engine.editor
 
-import engine.Engine
 import imgui.ImGui
-import imgui.ImGuiStyle
-import imgui.ImVec2
 import imgui.flag.ImGuiStyleVar
 
 class SceneView(editor: EditorModule) : EditorWindow(editor) {

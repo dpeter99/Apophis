@@ -2,7 +2,6 @@ package game.entities
 
 import engine.editor.inspectors.Inspector
 import engine.editor.inspectors.InspectorHelper
-import engine.entitysystem.CameraEntity
 import engine.entitysystem.Entity
 import engine.registry.ResourceName
 import glm_.vec2.Vec2

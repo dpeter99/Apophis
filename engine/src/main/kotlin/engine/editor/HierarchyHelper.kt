@@ -5,8 +5,6 @@ import imgui.ImGui
 import imgui.flag.ImGuiStyleVar
 import imgui.flag.ImGuiTreeNodeFlags
 import util.FontAwesomeIcons
-import java.util.function.BiPredicate
-import java.util.function.Predicate
 
 object HierarchyHelper {
 

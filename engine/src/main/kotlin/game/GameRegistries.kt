@@ -1,8 +1,6 @@
 package game
 
 import engine.editor.inspectors.InspectorSystem
-import engine.eventbus.AppEvent
-import engine.eventbus.SyncEventBus
 import game.entities.Asteroid
 import engine.entitysystem.EntityType
 import engine.registry.Registries

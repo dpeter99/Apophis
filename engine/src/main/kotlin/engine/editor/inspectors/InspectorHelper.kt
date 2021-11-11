@@ -7,12 +7,10 @@ import engine.entitysystem.SceneEntity
 import glm_.vec2.Vec2
 import imgui.ImGui
 import imgui.ImVec2
-import imgui.ImVec4
 import imgui.extension.imguizmo.ImGuizmo
 import imgui.flag.ImGuiCol
 import imgui.flag.ImGuiStyleVar
 import imgui.type.ImFloat
-import kotlin.jvm.internal.Ref
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.createType
 import kotlin.reflect.full.memberProperties
@@ -133,9 +131,11 @@ object InspectorHelper {
 
         val w = ImGui.calcItemWidth();
 
+
         ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, 0f, ImGui.getStyle().itemSpacingY);
 
         //val x: FloatArray = floatArrayOf(values.)
+        ImGui.setNextItemWidth(-1f);
         val res = internal_float_field("X", w, values.data, resetValue, red, showButtons)
             //values.element = x[0];
 
@@ -159,6 +159,7 @@ object InspectorHelper {
         ImGui.text(label);
         ImGui.nextColumn();
 
+        ImGui.setNextItemWidth(-1f)
         val w = ImGui.calcItemWidth()/2;
 
         ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, 0f, ImGui.getStyle().itemSpacingY);
@@ -217,7 +218,8 @@ object InspectorHelper {
 
         ImGui.sameLine();
 
-        res = res or ImGui.dragFloat("##$label", values, 0.1f, 0.0f, 0.0f, "%.2f")
+        //res = res or ImGui.dragFloat("##$label", values, 0.1f, 0.0f, 0.0f, "%.2f")
+        res = res or ImGui.dragFloat("##$label", values)
 
         ImGui.popItemWidth();
 

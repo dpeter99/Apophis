@@ -3,7 +3,6 @@ package engine.editor.inspectors
 import engine.entitysystem.CameraEntity
 import engine.entitysystem.Entity
 import engine.registry.ResourceName
-import glm_.vec2.Vec2
 import imgui.ImGui
 import imgui.type.ImFloat
 

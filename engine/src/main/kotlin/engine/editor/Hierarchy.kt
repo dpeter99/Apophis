@@ -1,10 +1,7 @@
 package engine.editor
 
 import engine.Engine
-import engine.entitysystem.Entity
 import imgui.ImGui
-import imgui.flag.ImGuiTreeNodeFlags
-import util.FontAwesomeIcons
 
 class Hierarchy(editor: EditorModule) : EditorWindow(editor) {
 

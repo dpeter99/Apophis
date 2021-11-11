@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import engine.editor.inspectors.ShowInInspector
-import engine.entitysystem.Entity
 import engine.entitysystem.SceneEntity
 
 class Asteroid(name: String = "Asteroid"): SceneEntity(name) {
