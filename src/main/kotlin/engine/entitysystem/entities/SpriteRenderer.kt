@@ -21,7 +21,7 @@ class SpriteRenderer(name: String = "Sprite Renderer") : SceneEntity(name) {
         val height = worldScale.y * size;
         val width = texture.width * (height / texture.height);
 
-        //batch.drawCentered(region,this.worldPosition, Vec2(width, height), this.worldRotation);
+        batch.drawCentered(region,this.worldPosition, Vec2(width, height), this.worldRotation);
 
         scene.shape.setColor(Color.BLUE)
         scene.shape.circle(worldPosition.x, worldPosition.y, 1f);

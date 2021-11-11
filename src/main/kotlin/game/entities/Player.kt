@@ -42,10 +42,10 @@ class Player() : SceneEntity("Player") {
             direction.y -= 1f;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            direction.x += 1f;
+            direction.x -= 1f;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            direction.x -= 1f;
+            direction.x += 1f;
         }
 
         //direction = direction.normalizeAssign();
@@ -53,13 +53,15 @@ class Player() : SceneEntity("Player") {
         heading = heading + (direction*0.05f);
         heading = heading.normalizeAssign();
 
-        this.rotation = atan2(heading.x,heading.y)*180/3.1415f;
+        this.rotation =-(atan2(heading.x,heading.y)*180/ kotlin.math.PI.toFloat());
 
         if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
             speed += 1f*0.1f;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)){
             speed -= 1f*0.1f;
+            if(speed < 0)
+                speed = 0f;
         }
 
         this.position plusAssign (heading * speed);
@@ -71,9 +73,9 @@ class Player() : SceneEntity("Player") {
         scene.shape.setColor(Color.GOLD)
         scene.shape.filledCircle(worldPosition.x, worldPosition.y, 1f);
 
-        val end = worldPosition + (Vec2(0,10f).rotate(this.rotation/ (180f/3.1415f)));
+        val end = worldPosition + (Vec2(0,15f).rotate(this.worldRotation/ (180f/kotlin.math.PI.toFloat())));
 
-        //scene.shape.line(worldPosition.x, worldPosition.y,end.x, end.y, 1f);
+        scene.shape.line(worldPosition.x, worldPosition.y,end.x, end.y, 1f);
 
         scene.shape.setColor(Color.GREEN)
         scene.shape.line(worldPosition.x, worldPosition.y,worldPosition.x + (heading.x*10f), worldPosition.y + (heading.y*10f), 1f);

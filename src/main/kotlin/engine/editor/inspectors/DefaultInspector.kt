@@ -9,7 +9,7 @@ class DefaultInspector(registryName: ResourceName) : Inspector(registryName, Obj
 
     override fun draw(ent:Entity) {
 
-        InspectorHelper.drawDefault(ent)
+        InspectorHelper.drawBasicInspector(ent)
     }
 
 }
