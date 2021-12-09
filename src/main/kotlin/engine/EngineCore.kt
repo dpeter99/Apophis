@@ -2,25 +2,38 @@ package engine
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.*
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
-import engine.modules.ModuleManager
-import engine.editor.EditorModule
+import com.badlogic.gdx.math.Matrix4
+import engine.editor.EditorCore
 import engine.entitysystem.Scene
 import engine.eventbus.AppEvent
 import engine.eventbus.SyncEventBus
+import engine.modules.ModuleManager
 import game.GameRegistries
 import game.TestScene
 import ktx.app.KtxGame
 
 
-open class EngineCore : KtxGame<Scene>(clearScreen = false) {
+open class EngineCore(private val directDraw:Boolean = true) : KtxGame<Scene>(clearScreen = false), IEngineCore {
+
+    companion object{
+        lateinit var Instance: EngineCore;
+    }
+
+    init {
+        Instance = this;
+    }
+
 
     lateinit var fb: FrameBuffer;
 
-    var screenwidth: Int = 0;
-    var screenheight: Int = 0;
+    override var screenwidth: Int = 0;
+    override var screenheight: Int = 0;
 
     var firstUpdate: Boolean = true;
+
+    private lateinit var batch: SpriteBatch;
 
     override fun create() {
         super.create()
@@ -28,18 +41,13 @@ open class EngineCore : KtxGame<Scene>(clearScreen = false) {
         screenwidth = Gdx.graphics.width
         screenheight = Gdx.graphics.height
 
-        //ModuleManager.modules.add(ImGuiLayer());
-        //ModuleManager.modules.add(EditorModule());
-
         currentScreen = TestScene();
 
         fb = FrameBuffer(Pixmap.Format.RGBA8888, screenwidth, screenheight, false);
-
-
-
+        batch = SpriteBatch();
     }
 
-    fun Init(){
+    override fun Init(){
         ModuleManager.Init();
         GameRegistries.Init();
 
@@ -54,6 +62,14 @@ open class EngineCore : KtxGame<Scene>(clearScreen = false) {
             firstUpdate = false;
         }
 
+        if(fb.width != screenwidth ||
+            fb.height != screenheight
+        ){
+            fb = FrameBuffer(Pixmap.Format.RGBA8888, screenwidth, screenheight, true);
+            (this.currentScreen as Scene).mainCamera?.Recalc();
+        }
+
+        Time.DeltaTime = Gdx.graphics.getDeltaTime();
 
         ModuleManager.Update();
 
@@ -61,8 +77,6 @@ open class EngineCore : KtxGame<Scene>(clearScreen = false) {
 
         fb.begin();
 
-        //Gdx.gl.glClearColor(1f, 0f, 0f, 1f);
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         ModuleManager.Render();
 
@@ -70,11 +84,17 @@ open class EngineCore : KtxGame<Scene>(clearScreen = false) {
 
         ModuleManager.LateRender();
 
+
         fb.end();
 
         ModuleManager.AfterFrameEnd();
 
-
+        if(directDraw){
+            batch.begin();
+            batch.projectionMatrix.setToOrtho2D(0f, 0f, this.screenwidth.toFloat(), this.screenheight.toFloat());
+            batch.draw(fb.colorBufferTexture, 0f, 0f, this.screenwidth.toFloat(), this.screenheight.toFloat(), 0f, 0f, 1f, 1f)
+            batch.end();
+        }
     }
 
     override fun dispose() {
@@ -83,7 +103,9 @@ open class EngineCore : KtxGame<Scene>(clearScreen = false) {
     }
 
     override fun resize(width: Int, height: Int) {
-        super.resize(width, height)
-        fb = FrameBuffer(Pixmap.Format.RGBA8888, screenwidth, screenheight, false);
+        //super.resize(width, height)
+        //fb = FrameBuffer(Pixmap.Format.RGBA8888, screenwidth, screenheight, false);
+        this.screenwidth = width;
+        this.screenheight = height;
     }
 }

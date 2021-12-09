@@ -3,11 +3,12 @@ package engine.editor
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import engine.EngineCore
-import engine.ImGuiLayer
+import engine.IEngineCore
+import engine.ImGuiModule
 import engine.entitysystem.Scene
 import engine.modules.ModuleManager
 
-class EditorCore : EngineCore() {
+class EditorCore : EngineCore(directDraw = false) {
 
     companion object{
         lateinit var Instance: EditorCore;
@@ -20,7 +21,7 @@ class EditorCore : EngineCore() {
     override fun create() {
         super.create()
 
-        ModuleManager.modules.add(ImGuiLayer());
+        ModuleManager.modules.add(ImGuiModule());
         ModuleManager.modules.add(EditorModule());
     }
 
@@ -29,13 +30,6 @@ class EditorCore : EngineCore() {
     }
 
     override fun render() {
-
-        if(fb.width != screenwidth ||
-            fb.height != screenheight
-        ){
-            fb = FrameBuffer(Pixmap.Format.RGBA8888, screenwidth, screenheight, false);
-            (this.currentScreen as Scene).mainCamera?.Recalc();
-        }
 
 
 
@@ -49,7 +43,6 @@ class EditorCore : EngineCore() {
     fun resizeFB(width:Int,height:Int){
         this.screenwidth = width;
         this.screenheight = height;
-
 
     }
 

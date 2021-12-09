@@ -3,7 +3,7 @@ package engine.entitysystem
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.math.Matrix4
-import engine.Engine
+import engine.Bootstrap
 import util.toVector3
 
 class CameraEntity : SceneEntity("Camera") {
@@ -37,8 +37,8 @@ class CameraEntity : SceneEntity("Camera") {
     }
 
     fun Recalc(){
-        val w = Engine.Instance.core.screenwidth;
-        val h = Engine.Instance.core.screenheight
+        val w = Bootstrap.Instance.core.screenwidth;
+        val h = Bootstrap.Instance.core.screenheight
 
         camera.viewportWidth = _worldSize;
         camera.viewportHeight = _worldSize * h/w;

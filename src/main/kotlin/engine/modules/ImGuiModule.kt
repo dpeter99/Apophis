@@ -18,7 +18,7 @@ import util.FontAwesomeIcons
 import util.ReadFiles
 
 
-class ImGuiLayer : ApplicationModule {
+class ImGuiModule : ApplicationModule {
 
     var imGuiGlfw = ImGuiImplGlfw()
     var imGuiGl3 = ImGuiImplGl3()
@@ -84,8 +84,6 @@ class ImGuiLayer : ApplicationModule {
     }
 
     override fun PreFrame() {
-
-
 
     }
 

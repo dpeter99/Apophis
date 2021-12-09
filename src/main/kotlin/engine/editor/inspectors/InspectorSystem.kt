@@ -1,6 +1,6 @@
 package engine.editor.inspectors
 
-import engine.Engine
+import engine.Bootstrap
 import engine.entitysystem.CameraEntity
 import engine.entitysystem.Entity
 import engine.registry.Registries
@@ -13,8 +13,8 @@ object InspectorSystem {
     val inspectors = Registries.addRegistry(SecondaryMappingRegistry<Inspector,Class<*>>(ResourceName("engine","inspectors")));
 
 
-    val DEFAULT by inspectors.deferredRegister(DefaultInspector(Engine.resName("default")));
-    val CAMERA by inspectors.deferredRegister(CameraInspector(Engine.resName("camera"), CameraEntity::class.java));
+    val DEFAULT by inspectors.deferredRegister(DefaultInspector(Bootstrap.resName("default")));
+    val CAMERA by inspectors.deferredRegister(CameraInspector(Bootstrap.resName("camera"), CameraEntity::class.java));
 
     fun init(){
 

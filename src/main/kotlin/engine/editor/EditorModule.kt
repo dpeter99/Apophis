@@ -1,6 +1,6 @@
 package engine.editor
 
-import engine.ImGuiLayer
+import engine.ImGuiModule
 import engine.editor.inspectors.InspectorSystem
 import engine.entitysystem.Entity
 import engine.eventbus.SyncEventBus
@@ -20,7 +20,7 @@ class EditorModule : ApplicationModule {
         windows.add(SceneView(this));
         windows.add(RegistryViewer(this));
 
-        SyncEventBus.MAIN.subscribeTo(ImGuiLayer.OnGUIEvent::class.java,false,this::onGui)
+        SyncEventBus.MAIN.subscribeTo(ImGuiModule.OnGUIEvent::class.java,false,this::onGui)
     }
 
     override fun Init() {
@@ -28,7 +28,7 @@ class EditorModule : ApplicationModule {
         InspectorSystem.init();
     }
 
-    fun onGui(event: ImGuiLayer.OnGUIEvent) {
+    fun onGui(event: ImGuiModule.OnGUIEvent) {
         super.Render()
         for (win in windows){
             win.onGui();

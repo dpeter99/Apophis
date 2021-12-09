@@ -1,16 +1,13 @@
 package engine.editor
 
-import engine.Engine
-import engine.entitysystem.Entity
+import engine.Bootstrap
 import imgui.ImGui
-import imgui.flag.ImGuiTreeNodeFlags
-import util.FontAwesomeIcons
 
 class Hierarchy(editor: EditorModule) : EditorWindow(editor) {
 
 
     override fun onGui() {
-        val scene = Engine.Instance.core.shownScreen;
+        val scene = Bootstrap.Instance.core.shownScreen;
 
         ImGui.begin("Hierarchy");
 

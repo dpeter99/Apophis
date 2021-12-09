@@ -4,15 +4,12 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import engine.entitysystem.CameraEntity
 import engine.entitysystem.SceneEntity
 import engine.entitysystem.entities.SpriteRenderer
-import glm_.vec1.operators.plus
+import engine.Time
 import glm_.vec2.Vec2
-import imgui.extension.imguizmo.ImGuizmo
 import util.Zero
-import kotlin.math.PI
 import kotlin.math.atan2
 
 class Player() : SceneEntity("Player") {
@@ -25,7 +22,7 @@ class Player() : SceneEntity("Player") {
 
     override fun Setup(){
         addInternal(CameraEntity()){
-            this.worldSize = 200f;
+            this.worldSize = 500f;
         }
         renderer = addInternal(SpriteRenderer());
     }
@@ -56,15 +53,15 @@ class Player() : SceneEntity("Player") {
         this.rotation =-(atan2(heading.x,heading.y)*180/ kotlin.math.PI.toFloat());
 
         if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            speed += 1f*0.1f;
+            speed += 10f*Time.DeltaTime;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)){
-            speed -= 1f*0.1f;
+            speed -= 10f*Time.DeltaTime;
             if(speed < 0)
                 speed = 0f;
         }
 
-        this.position plusAssign (heading * speed);
+        this.position plusAssign (heading * speed * Time.DeltaTime);
 
     }
 
