@@ -85,7 +85,7 @@ open class Scene : KtxScreen {
         batch.projectionMatrix = mainCamera?.combinedMatrix;
         //shape.p = mainCamera?.combinedMatrix;
 
-        Gdx.gl.glClearColor(0.5f, 0.5f, 0f, 1f);
+        Gdx.gl.glClearColor(0.0f, 0.0f, 0.1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin()
