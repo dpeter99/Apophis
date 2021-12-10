@@ -66,6 +66,7 @@ class ComposeModule: ApplicationModule {
         composeScene.setContent {
             App()
         }
+        
     }
 
     private fun creatSurface(w: Int, h: Int) {
