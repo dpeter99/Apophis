@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.5.31"
+    id("org.jetbrains.compose") version "1.0.0"
 }
 
 group = "com.dpeter99"
@@ -31,6 +32,8 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.31")
+
+    implementation(compose.desktop.currentOs)
 
     //api("com.github.kotlin-graphics.imgui:bgfx:$imguiVersion")
     //implementation("com.github.kotlin-graphics:imgui:$imguiVersion")

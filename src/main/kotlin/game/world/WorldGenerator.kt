@@ -18,7 +18,7 @@ class WorldGenerator {
 
         val root = scene.add(Entity("World Root"));
 
-        for (i in 0..499) {
+        for (i in 0..1) {
             //val res: Unit = GenerateNewResource()
             //val count: Unit = rnd.nextInt(5) + 1
 
