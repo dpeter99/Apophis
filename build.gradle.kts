@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.5.31"
+    id("org.jetbrains.compose") version "1.0.0"
 }
 
 group = "com.dpeter99"
@@ -14,7 +15,7 @@ repositories {
     maven("https://jitpack.io")
     maven("https://raw.githubusercontent.com/kotlin-graphics/mary/master")
 
-    maven("https://dl.bintray.com/kotlin/kotlin-dev")
+    //maven("https://dl.bintray.com/kotlin/kotlin-dev")
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
 
     maven("https://maven.scijava.org/content/repositories/public/")
@@ -27,10 +28,15 @@ val imguiVersion = "1.84.1.3"
 val shapedrawerVersion = "2.5.0"
 
 dependencies {
+
     testImplementation(kotlin("test"))
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.31")
+
+    implementation(compose.desktop.currentOs)
+    implementation(compose.uiTooling)
+    implementation(compose.preview)
 
     //api("com.github.kotlin-graphics.imgui:bgfx:$imguiVersion")
     //implementation("com.github.kotlin-graphics:imgui:$imguiVersion")

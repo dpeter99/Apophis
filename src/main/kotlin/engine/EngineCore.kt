@@ -1,10 +1,12 @@
 package engine
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics
 import com.badlogic.gdx.graphics.*
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.math.Matrix4
+import engine.compose.ComposeModule
 import engine.editor.EditorCore
 import engine.entitysystem.Scene
 import engine.eventbus.AppEvent
@@ -13,6 +15,7 @@ import engine.modules.ModuleManager
 import game.GameRegistries
 import game.TestScene
 import ktx.app.KtxGame
+import org.lwjgl.glfw.GLFW
 
 
 open class EngineCore(private val directDraw:Boolean = true) : KtxGame<Scene>(clearScreen = false), IEngineCore {
@@ -45,6 +48,8 @@ open class EngineCore(private val directDraw:Boolean = true) : KtxGame<Scene>(cl
 
         fb = FrameBuffer(Pixmap.Format.RGBA8888, screenwidth, screenheight, false);
         batch = SpriteBatch();
+
+        ModuleManager.modules.add(ComposeModule());
     }
 
     override fun Init(){
@@ -57,6 +62,7 @@ open class EngineCore(private val directDraw:Boolean = true) : KtxGame<Scene>(cl
     }
 
     override fun render() {
+
         if(firstUpdate){
             Init();
             firstUpdate = false;
@@ -65,8 +71,11 @@ open class EngineCore(private val directDraw:Boolean = true) : KtxGame<Scene>(cl
         if(fb.width != screenwidth ||
             fb.height != screenheight
         ){
-            fb = FrameBuffer(Pixmap.Format.RGBA8888, screenwidth, screenheight, true);
-            (this.currentScreen as Scene).mainCamera?.Recalc();
+
+            if(screenwidth > 0 || screenheight > 0) {
+                fb = FrameBuffer(Pixmap.Format.RGBA8888, screenwidth, screenheight, true);
+                (this.currentScreen as Scene).mainCamera?.Recalc();
+            }
         }
 
         Time.DeltaTime = Gdx.graphics.getDeltaTime();
@@ -77,15 +86,14 @@ open class EngineCore(private val directDraw:Boolean = true) : KtxGame<Scene>(cl
 
         fb.begin();
 
-
         ModuleManager.Render();
 
         super.render()
 
         ModuleManager.LateRender();
 
-
         fb.end();
+
 
         ModuleManager.AfterFrameEnd();
 

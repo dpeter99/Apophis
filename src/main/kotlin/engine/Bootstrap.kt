@@ -35,6 +35,9 @@ class Bootstrap(type: EngineType) {
     fun Run() {
         val config = Lwjgl3ApplicationConfiguration()
         config.setWindowedMode(1000,650);
+        config.useOpenGL3(true,4,0);
+        config.enableGLDebugOutput(true,System.out);
+
         Lwjgl3Application(core, config)
     }
 
